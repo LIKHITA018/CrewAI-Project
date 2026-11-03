@@ -18,12 +18,14 @@ from projects.lead_qualification import run_lead_qualification
 
 
 # Create FastAPI application
+app.openapi_version = "3.0.3"
+
+
+
 app = FastAPI(
     title="CrewAI 10 Projects API",
-    description="API for 10 CrewAI projects",
-    version="1.0.0"
+    docs_url="/docs"
 )
-app.openapi_version = "3.0.3"
 
 
 # Home route
