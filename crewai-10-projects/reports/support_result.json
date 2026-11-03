@@ -1,0 +1,7 @@
+{
+  "ticket_id": "TICKET-1001",
+  "customer_name": "Rahul Sharma",
+  "category": "other",
+  "priority": "high",
+  "resolution": "Technical support: investigate the reported issue, collect relevant error details, and provide troubleshooting."
+}

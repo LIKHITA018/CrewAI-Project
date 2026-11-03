@@ -1,0 +1,1 @@
+Project meeting discussion: Rahul will complete the frontend design by Friday. Priya will handle the database integration. Amit will prepare the project documentation. The team will conduct testing next Monday. The final project submission deadline is November 20.
