@@ -3164,6 +3164,27 @@ EXPECTED_AGENTS = {
     "lead_qualification": "run_lead_qualification",
     "approval_report": "run_approval_report"
 }
+@app.get("/", tags=["Home"])
+def home():
+    return {
+        "message": "Welcome to CrewAI 10 Projects API!",
+        "status": "Running",
+        "documentation": "/docs",
+        "health_dashboard": "/health",
+        "total_agents": 10,
+        "agents": [
+            "/agent1",
+            "/agent2",
+            "/agent3",
+            "/agent4",
+            "/agent5",
+            "/agent6",
+            "/agent7",
+            "/agent8",
+            "/agent9",
+            "/agent10"
+        ]
+    }
 
 @app.get(
     "/health",
