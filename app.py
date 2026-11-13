@@ -20,7 +20,7 @@ REPORTS_DIR = ROOT_DIR / "reports"
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 load_dotenv(ROOT_DIR / ".env", override=True)
 
-if not (os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY1")):
+if not (os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY3")):
     print("WARNING: GEMINI_API_KEY is not set. Add it to your environment or .env before running agents.")
 
 PROJECT_SOURCES = {}
@@ -66,7 +66,7 @@ PROJECT_SOURCES['approval_report.py'] = (
     '\r\n'
     'raw_key = (\r\n'
     '    os.environ.get("GEMINI_API_KEY")\r\n'
-    '    or os.environ.get("GEMINI_API_KEY1")\r\n'
+    '    or os.environ.get("GEMINI_API_KEY3")\r\n'
     '    or ""\r\n'
     ')\r\n'
     '\r\n'
@@ -83,7 +83,7 @@ PROJECT_SOURCES['approval_report.py'] = (
     'api_key = unique_keys[0]\r\n'
     '\r\n'
     'os.environ["GEMINI_API_KEY"] = api_key\r\n'
-    'os.environ["GEMINI_API_KEY1"] = api_key\r\n'
+    'os.environ["GEMINI_API_KEY3"] = api_key\r\n'
     'os.environ.pop("OPENAI_API_KEY", None)\r\n'
     '\r\n'
     'print("Gemini API key loaded successfully!")\r\n'
