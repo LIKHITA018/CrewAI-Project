@@ -3629,17 +3629,6 @@ def agent5(request: InputRequest):
 
 
 
-@app.post("/agent6")
-def agent6(request: InputRequest):
-    return _run(
-        "resume_screening",
-        "run_resume_screening_text",
-        job_title="Python Developer",
-        job_description="Looking for a Python developer with programming and problem-solving skills.",
-        resume_name="Candidate Resume",
-        resume_text=request.input
-    )
-
 
 @app.post("/agent6")
 def agent6(request: InputRequest):
@@ -3701,6 +3690,15 @@ def agent6(request: InputRequest):
         resume_text=resume_text
     )
 
+
+@app.post("/agent7")
+def agent7(request: InputRequest):
+    return _run(
+        "bug_triage",
+        "run_bug_triage",
+        issue_title="Bug Report",
+        issue_body=request.input
+    )
 
 @app.post("/agent8")
 def agent8(request: InputRequest):
