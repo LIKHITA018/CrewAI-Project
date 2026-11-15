@@ -1,66 +1,283 @@
-﻿CrewAI 10 Projects – FastAPI
-A single-file FastAPI application that exposes ten original CrewAI projects as HTTP endpoints. The original project source files from the supplied ZIP are embedded in app.py and executed in isolated namespaces to avoid collisions between similarly named helpers.
-Projects and endpoints
-Endpoint	Project	Request JSON fields
-POST /agent1	Blog Post Crew	topic
-POST /agent2	Competitor Analysis Crew	competitors (array of strings)
-POST /agent3	Meeting Notes Crew	transcript
-POST /agent4	Data Report Crew	No request body
-POST /agent5	Customer Support Flow	ticket_id, customer_name, issue_description
-POST /agent6	Resume Screening Flow	job_title, job_description, resume_name, resume_text
-POST /agent7	Bug Triage Flow	issue_title, issue_body
-POST /agent8	Content Repurposing Flow	article_input
-POST /agent9	Lead Qualification Flow	lead_name, lead_company, lead_website
-POST /agent10	Approval Report Flow	topic, audience
-POST /agent10/review	Human review for Approval Report Flow	flow_id, feedback
+﻿# WorkSphere AI – 10 CrewAI Agents Platform
 
+WorkSphere AI is a full-stack AI-powered platform that brings together ten intelligent CrewAI projects through a FastAPI backend and a modern React dashboard.
 
-Successful project responses use the shape {"output": ...}. Errors are returned as FastAPI HTTP errors with a detail field.
-Requirements
-- Python 3.10 or newer (Python 3.11 is a sensible choice for deployment).
-- A Gemini API key.
-Local setup (Windows PowerShell)
-1. Open PowerShell in the folder containing app.py.
-2. Create and activate a virtual environment:
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1
-3. Install dependencies:
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-4. Create a .env file in the same folder as app.py:
-   GEMINI_API_KEY=your_gemini_api_key_here
-   Do not upload or commit .env to GitHub.
-5. Start the API:
-   python -m uvicorn app:app --reload
-6. Open the interactive API documentation at http://127.0.0.1:8000/docs.
-Example requests
-Agent 1 – Blog Post
-{
-  "topic": "How AI is changing education"
-}
-Agent 6 – Resume Screening
-{
-  "job_title": "Python Developer",
-  "job_description": "Looking for Python, FastAPI, SQL and problem-solving skills.",
-  "resume_name": "candidate_01",
-  "resume_text": "Python developer with experience in FastAPI, SQL and Git."
-}
-Agent 7 – Bug Triage
-{
-  "issue_title": "Login button not responding",
-  "issue_body": "The login button does nothing after valid credentials are entered."
-}
-Agent 10 – Approval Report
-{
-  "topic": "Responsible use of generative AI",
-  "audience": "College students"
-}
-The Agent 10 flow may pause for human review and return a flow_id. Submit that ID and your feedback to POST /agent10/review.
-Deployment (Render)
-- Runtime: Python.
-- Build command: pip install -r requirements.txt
-- Start command: uvicorn app:app --host 0.0.0.0 --port $PORT
-- Add GEMINI_API_KEY as a secret environment variable in the Render dashboard.
-- Keep the Render root directory set to the directory containing app.py and requirements.txt.
-Repository hygiene
-Commit only the application and project documentation files. Do not commit .env, virtual environments, __pycache__, generated reports, or API keys.
+The application allows users to execute AI agents, generate intelligent outputs, track task history, monitor agent performance, and manage their workspace through a centralized interface.
+
+## Project Overview
+
+WorkSphere AI combines:
+
+- **Frontend:** React.js and Vite
+- **Backend:** Python and FastAPI
+- **AI Framework:** CrewAI
+- **LLM Provider:** Google Gemini
+- **Deployment:** Render
+- **Version Control:** Git and GitHub
+
+## Key Features
+
+### AI Agent Platform
+
+The application includes ten specialized AI agents:
+
+| Agent | Project | Function |
+|---|---|---|
+| Agent 1 | Blog Post Generator | Generates blog content |
+| Agent 2 | Competitor Analysis | Analyzes competitors |
+| Agent 3 | Meeting Notes | Processes meeting transcripts |
+| Agent 4 | Data Report | Generates reports from sales data |
+| Agent 5 | Customer Support | Handles customer support requests |
+| Agent 6 | Resume Screening | Evaluates candidate resumes |
+| Agent 7 | Bug Triage | Analyzes and categorizes bugs |
+| Agent 8 | Content Repurposing | Repurposes existing content |
+| Agent 9 | Lead Qualification | Evaluates potential leads |
+| Agent 10 | Approval Report | Generates reports with human review |
+
+### Dashboard Features
+
+- Centralized AI agent dashboard
+- Individual agent execution interface
+- Input and output management
+- Task history and search
+- Agent performance monitoring
+- Backend health monitoring
+- Output copying and downloading
+- Settings and workspace administration
+- Responsive user interface
+
+## Technology Stack
+
+**Frontend**
+- React.js
+- Vite
+- JavaScript
+- CSS
+- Lucide React Icons
+
+**Backend**
+- Python
+- FastAPI
+- CrewAI
+- Pydantic
+- Pandas
+
+**AI Integration**
+- Google Gemini API
+
+**Deployment and Tools**
+- Render
+- GitHub
+- Uvicorn
+- REST API
+
+## Project Structure
+
+```text
+CrewAI-Project/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── reports/
+│   └── sales.csv
+│
+└── frontend/
+    ├── package.json
+    ├── package-lock.json
+    ├── index.html
+    ├── vite.config.js
+    │
+    ├── public/
+    │
+    └── src/
+        ├── App.jsx
+        ├── App.css
+        ├── index.css
+        ├── main.jsx
+        └── assets/
+```
+
+## Backend API Endpoints
+
+The FastAPI backend exposes ten AI agent endpoints and a human-review endpoint.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/agent1` | Blog Post Generator |
+| POST | `/agent2` | Competitor Analysis |
+| POST | `/agent3` | Meeting Notes |
+| POST | `/agent4` | Data Report |
+| POST | `/agent5` | Customer Support |
+| POST | `/agent6` | Resume Screening |
+| POST | `/agent7` | Bug Triage |
+| POST | `/agent8` | Content Repurposing |
+| POST | `/agent9` | Lead Qualification |
+| POST | `/agent10` | Approval Report |
+| POST | `/agent10/review` | Human Review |
+
+Successful agent responses use an output field. Refer to the interactive Swagger documentation for the exact request schemas and response details.
+
+## Local Installation and Setup
+
+### Prerequisites
+
+- Python 3.10 or newer
+- Node.js and npm
+- Google Gemini API key
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/LIKHITA018/CrewAI-Project.git
+cd CrewAI-Project
+```
+
+### 2. Set up the backend
+
+Create a virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate it on Windows:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Never upload your API key or `.env` file to GitHub.
+
+### 4. Start the backend
+
+```bash
+python -m uvicorn app:app --reload --host 127.0.0.1 --port 8000
+```
+
+Backend documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Backend health endpoint:
+
+```text
+http://127.0.0.1:8000/health
+```
+
+### 5. Set up the frontend
+
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+### 6. Start the frontend
+
+```bash
+npm run dev
+```
+
+Open the local Vite URL displayed in your terminal, usually:
+
+```text
+http://localhost:5173
+```
+
+The Vite development proxy forwards `/api` requests to the FastAPI backend.
+
+## Production Deployment
+
+### Backend – Render
+
+The FastAPI backend is deployed on Render.
+
+**Backend URL:**
+
+https://agentiai-project-using-crewai.onrender.com
+
+**API Documentation:**
+
+https://agentiai-project-using-crewai.onrender.com/docs
+
+**Health Monitoring:**
+
+https://agentiai-project-using-crewai.onrender.com/health
+
+Render configuration:
+
+- Runtime: Python
+- Build Command: `pip install -r requirements.txt`
+- Start Command: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+- Environment Variable: `GEMINI_API_KEY`
+
+### Frontend – Render Static Site
+
+The React frontend can be deployed as a Render Static Site.
+
+Configuration:
+
+- Root Directory: `frontend`
+- Build Command: `npm install && npm run build`
+- Publish Directory: `dist`
+
+Set the following environment variable:
+
+```env
+VITE_API_BASE_URL=https://agentiai-project-using-crewai.onrender.com
+```
+
+The frontend uses this URL to communicate directly with the deployed FastAPI backend.
+
+The backend must allow requests from the deployed frontend origin through its CORS configuration.
+
+## API Response and Error Handling
+
+- Successful agent executions return generated output.
+- Failed requests return FastAPI HTTP errors with a detail field.
+- Backend health information provides agent execution statistics.
+- Agent 10 supports a human-review workflow.
+
+## Repository Hygiene
+
+The repository excludes:
+
+- `.env` files and API credentials
+- Python virtual environments
+- `node_modules`
+- Python cache files
+- Generated temporary files and reports
+
+The required `reports/sales.csv` dataset is included for the Data Report agent.
+
+## GitHub Repository
+
+https://github.com/LIKHITA018/CrewAI-Project
+
+## Project Goal
+
+WorkSphere AI demonstrates how multiple specialized AI agents can be integrated into a single full-stack application using CrewAI, FastAPI, and React.
+
+It provides a centralized environment for AI task execution, monitoring, and workflow management.
