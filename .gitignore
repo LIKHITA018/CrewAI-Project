@@ -1,0 +1,27 @@
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+venv/
+.venv/
+**/venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Node dependencies and builds
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Keep only the required sales dataset
+reports/*
+!reports/sales.csv
+
+# Logs
+*.log

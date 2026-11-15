@@ -6,6 +6,7 @@ import time
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 from fastapi.openapi.docs import get_swagger_ui_html
@@ -3101,6 +3102,14 @@ app = FastAPI(
     docs_url=None,
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 AGENT_METRICS = {}
