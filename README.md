@@ -281,3 +281,14 @@ https://github.com/LIKHITA018/CrewAI-Project
 WorkSphere AI demonstrates how multiple specialized AI agents can be integrated into a single full-stack application using CrewAI, FastAPI, and React.
 
 It provides a centralized environment for AI task execution, monitoring, and workflow management.
+
+## Live Application
+
+Frontend:
+https://worksphere-ai-2lch.onrender.com
+
+Backend:
+https://agentiai-project-using-crewai.onrender.com
+
+API Documentation:
+https://agentiai-project-using-crewai.onrender.com/docs
