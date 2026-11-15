@@ -3103,8 +3103,6 @@ app = FastAPI(
     openapi_url="/openapi.json",
 )
 
-
-
 AGENT_METRICS = {}
 
 def _run(project: str, function_name: str, **kwargs):
