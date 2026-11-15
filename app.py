@@ -3583,15 +3583,50 @@ def agent4(request: InputRequest):
         input=request.input
     )
 
+
 @app.post("/agent5")
 def agent5(request: InputRequest):
+    import re
+
+    user_input = request.input.strip()
+
+    ticket_match = re.search(
+        r"Ticket ID:\s*(.+)",
+        user_input,
+        re.IGNORECASE
+    )
+
+    customer_match = re.search(
+        r"Customer Name:\s*(.+)",
+        user_input,
+        re.IGNORECASE
+    )
+
+    ticket_id = ticket_match.group(1).strip() if ticket_match else "TICKET-101"
+    customer_name = customer_match.group(1).strip() if customer_match else "Rahul"
+
+    issue_description = re.sub(
+        r"^(Customer Name|Ticket ID):.*$",
+        "",
+        user_input,
+        flags=re.IGNORECASE | re.MULTILINE
+    )
+
+    issue_description = re.sub(
+        r"^Issue:\s*",
+        "",
+        issue_description,
+        flags=re.IGNORECASE | re.MULTILINE
+    ).strip()
+
     return _run(
         "customer_support",
         "run_customer_support",
-        ticket_id="TICKET-101",
-        customer_name="Rahul",
-        issue_description=request.input
+        ticket_id=ticket_id,
+        customer_name=customer_name,
+        issue_description=issue_description
     )
+
 
 
 @app.post("/agent6")
