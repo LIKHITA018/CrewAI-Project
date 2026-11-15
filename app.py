@@ -3640,14 +3640,67 @@ def agent6(request: InputRequest):
         resume_text=request.input
     )
 
-@app.post("/agent7")
-def agent7(request: InputRequest):
-    return _run(
-        "bug_triage",
-        "run_bug_triage",
-        issue_title="Bug Report",
-        issue_body=request.input
+
+@app.post("/agent6")
+def agent6(request: InputRequest):
+    import re
+
+    user_input = request.input.strip()
+
+    job_title_match = re.search(
+        r"Job Title:\s*(.+)",
+        user_input,
+        re.IGNORECASE
     )
+
+    job_description_match = re.search(
+        r"Job Description:\s*([\s\S]*?)(?=\nResume Name:|\nResume Text:|$)",
+        user_input,
+        re.IGNORECASE
+    )
+
+    resume_name_match = re.search(
+        r"Resume Name:\s*(.+)",
+        user_input,
+        re.IGNORECASE
+    )
+
+    resume_text_match = re.search(
+        r"Resume Text:\s*([\s\S]+)",
+        user_input,
+        re.IGNORECASE
+    )
+
+    job_title = (
+        job_title_match.group(1).strip()
+        if job_title_match else "Python Developer"
+    )
+
+    job_description = (
+        job_description_match.group(1).strip()
+        if job_description_match else
+        "Looking for a Python developer with programming and problem-solving skills."
+    )
+
+    resume_name = (
+        resume_name_match.group(1).strip()
+        if resume_name_match else "Candidate Resume"
+    )
+
+    resume_text = (
+        resume_text_match.group(1).strip()
+        if resume_text_match else user_input
+    )
+
+    return _run(
+        "resume_screening",
+        "run_resume_screening_text",
+        job_title=job_title,
+        job_description=job_description,
+        resume_name=resume_name,
+        resume_text=resume_text
+    )
+
 
 @app.post("/agent8")
 def agent8(request: InputRequest):
